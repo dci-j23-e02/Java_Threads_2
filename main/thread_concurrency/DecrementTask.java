@@ -1,24 +1,18 @@
 package thread_concurrency;
 
-public class DecrementTask implements  Runnable{
- private final Counter counter;
+class DecrementTask implements Runnable {
+  private final Counter counter;
+  private final int decrements;
 
-
-  public DecrementTask() {
-    this.counter = new Counter();
+  public DecrementTask(Counter counter, int decrements) {
+    this.counter = counter;
+    this.decrements = decrements;
   }
 
-  public DecrementTask(Counter object) {
-    this.counter = object; // Wrong approach: example requirements
-
-   // this.counter = new Counter(object.getCount()); // Correct approach
-  }
-
-
-  @Override
   public void run() {
-    for (int i = 0; i < 10000; i++) {
-       counter.decrement();
+    for (int i = 0; i < decrements; i++) {
+      counter.decrement();
+      System.out.println("Decremented: " + counter.getCount());
     }
   }
 }

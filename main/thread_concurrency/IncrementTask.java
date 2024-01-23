@@ -1,23 +1,18 @@
 package thread_concurrency;
 
-public class IncrementTask implements Runnable {
-
+class IncrementTask implements Runnable {
   private final Counter counter;
+  private final int increments;
 
-  public IncrementTask() {
-    this.counter = new Counter();
+  public IncrementTask(Counter counter, int increments) {
+    this.counter = counter;
+    this.increments = increments;
   }
 
-  public IncrementTask(Counter object) {
-    this.counter = object; // Wrong approach: example requirements
-
-   // this.counter = new Counter(object.getCount()); // Correct approach
-  }
-
-  @Override
   public void run() {
-    for (int i = 0; i < 10000; i++) {
+    for (int i = 0; i < increments; i++) {
       counter.increment();
+      System.out.println("Incremented: " + counter.getCount());
     }
   }
 }
